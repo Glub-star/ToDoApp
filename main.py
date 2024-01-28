@@ -106,17 +106,12 @@ def ToDoList(account, data):
       window,
       text="Add Task",
       command=lambda: add_task(add_task_entry, window, account, data))
-  remove_task_button = tk.Button(
-      window,
-      text="Remove Selected Tasks",
-      command=lambda: remove_selected_tasks(tasks_frame, account, data))
   logout_button = tk.Button(window,
                             text="Logout",
                             command=lambda: logout(window))
 
   add_task_entry.pack()
   add_task_button.pack()
-  remove_task_button.pack()
   logout_button.pack()
 
   window.mainloop()
