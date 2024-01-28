@@ -12,7 +12,22 @@ def on_button_click(Username, Password, window):
         window.destroy()
         ToDoList()
 
-with open("Data.json", 'r') as file:
+def Add_task(task_entry, window):
+    new_task_description = task_entry.get()
+
+    # Add the new task to the data
+    task_id = str(len(data["Accounts"][account]["Tasks"]) + 1)
+    data["Accounts"][account]["Tasks"][task_id] = new_task_description
+
+    # Write the updated data back to the file
+    with open("data.json", "w") as file:
+        json.dump(data, file, indent=2)
+
+    # Refresh the ToDoList window to display the updated tasks
+    window.destroy()
+    ToDoList()
+
+with open("data.json", 'r') as file:
     data = json.load(file)
 
 def LoginScreen():
@@ -40,12 +55,22 @@ def LoginScreen():
 
 def ToDoList():
     window = tk.Tk()
-    window.geometry("200x300")
+    window.geometry("200x400")
     window.title("To Do list")
 
+    tasks_frame = tk.Frame(window)
+    tasks_frame.pack()
+
     for task_id, task_description in data["Accounts"][account]["Tasks"].items():
-        label = tk.Label(window, text=f"You have to do: {task_description}.")
+        label = tk.Label(tasks_frame, text=f"You have to do: {task_description}.")
         label.pack()
+
+    AddTask = tk.Entry(window)
+    AddTaskButton = tk.Button(window, text="Add Task", command=lambda: Add_task(AddTask, window))
+
+    # Pack the new widgets
+    AddTask.pack()
+    AddTaskButton.pack()
 
     # Start the main event loop for the ToDoList window
     window.mainloop()
