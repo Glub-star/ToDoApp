@@ -1,0 +1,14 @@
+{
+    "Accounts": {
+        "Jo": {
+            "Username": "Jo",
+            "Password": "1234",
+            "Tasks": {
+                "1": "finish x",
+                "2": "finish y",
+                "3": "finish z"
+            }
+        }
+    }
+    
+}
